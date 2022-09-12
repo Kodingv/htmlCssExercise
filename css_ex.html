@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>css</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /*전체 선택자*/
+      /* *{모든 요소를 한 번에 선택자로 지정하는 방법} */
+
+      /*기본 속성 선택자*/
+      /* [속성] { css code } */    /* [속성=값] { css code} */
+
+      /*자식 선택자*/
+      /* 부모 선택자 > 자식 선택자 { css code} */
+      
+      /*하위 선택자*/
+      /* 상위선택자 하위선택자 { css code } */
+
+      /*인접 형제 선택자*/
+      /* 이전 선택자 + 대상 선택자 { css code }*/
+      /*앞에서 지정한 선택자 요소 바로 다음에 있는 형제 관계요소를 선택자로 지정*/
+      /*이전 요소 다음에 등장하는 형제 요소를 선택 / 따라서 이전 요소보다 먼저 등장한 요소는 선택 대상이 아님*/
+
+      /*일반 형제 선택자*/
+      /*이전 선택자 ~ 대상 선택자 { css code }*/
+      /*일반 형제 선택자는 이전 선택자 뒤에 오는 형제 관계 요소를 모두 선택자로 지정*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*가상 요소 선택자 사용하기*/
+      /*기준 선택자::가상 요소 선택자 { css code }*/
+      /*example*/
+      .example_1::before {
+        content:'<before>';
+        color: red;
+      }
+      .example_1::after {
+        content:'<after>';      /* content 속성은 css 속성으로 새로운 콘텐츠를 생성할 때 사용 / HTML 문서에 작성한 콘텐츠처럼 다른 CSS 속성과 함께 활용 가능*/
+      }
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*가상 클래스 선택자 사용하기 (selector:pseudo-class)*/
+
+      /*link pseudo-class selector 링크 가상 클래스 선택자*/
+      /*a tag에서 발생할 수 있는 링크 상태를 이용해 선택하는 방법*/
+      /* selector:link {한 번도 방문하지 않은 링크일 때 선택한다} */
+      /* selector:visited {한 번이라도 방문한 적이 있는 링크일 때 선택한다} */
+
+      /*input element pseudo-class selector 입력 요소 가상 클래스 선택자*/
+        /*focus pseudo-class*/
+        /*입력 요소에 커서가 활성화되면 스타일을 적용*/
+        /*example*/
+        .example_2:focus {
+          color: red;
+        }
+
+        /*checked pseudo-class*/
+        /*체크박스가 표시되어 있으면 스타일을 적용*/
+        /*example*/
+        .example_3:checked + label {
+          color: red;
+        }
+
+        /*disabled pseudo-class*/
+        /*상호작용 요소가 비활성화되어 있으면 스타일을 적용*/
+        /*example*/
+        .example_4:disabled {
+          background-color: lightgray;
+        }
+
+        /*enabled pseudo-class*/
+        /*상호작용 요소가 활성화되어 있으면 스타일을 적용 / disabled 속성이 사용되지 않은 상호작용 요소를 선택한다*/
+        /*example*/
+        .example_5:enabled {
+          background-color: lightgoldenrodyellow;
+        }
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*structural pseudo-class 구조적 가상 클래스*/
+
+      /*first-child , last-child pseudo-class*/
+      /*selector:first-child {부모인 selector 요소의 첫 번째 자식 요소를 선택}*/
+      /*selector:last-child {부모인 selector 요소의 마지막 자식 요소를 선택}*/
+      /*selector는 부모element가 아닌 자식element로 타겟*/
+      /*example*/
+      .example_6:first-child {
+        color: red;
+      }
+      .example_6:last-child {
+        color: red;
+      }
+
+      /*nth-child(n) , nth-last-child(n) pseudo-class*/
+      /*nth-child(n) : selector(element) 요소가 부모의 모든 자식 요소 중 n번째 자식 요소가 맞으면 선택*/
+      /*nth-last-child(n) : 선택자를 찾는 기준이 부모 요소의 끝에서부터 찾는다*/
+      /*selector는 부모element가 아닌 자식element로 타겟*/
+      /*example*/
+      .example_7:nth-child(1) {
+        color: red;
+      }
+      .example_7:nth-last-child(1) {
+        color: lightblue;
+      }
+
+      /*nth-of-type(n) , nth-last-of-type(n) pseudo-class*/
+      /*nth-of-type(n) : 부모 요소의 자식 요소 중 특정 element의 n번째로 등장하는 element를 선택*/
+      /*nth-last-of-type(n) : 부모 요소의 자식 요소 중 끝에서부터 찾는다*/
+      /*selector는 부모element가 아닌 자식element로 타겟*/
+      /*example*/
+      .example_8:nth-of-type(2) {
+        color: red;
+      }
+      .example_8:nth-last-of-type(2) {
+        color: lightblue;
+      }
+
+      /*first-of-type , last-of-type pseudo-class*/
+      /*first-of-type : 부모의 자식 중에서 특정 element 중 첫 번째로 등장하는 element를 선택*/
+      /*last-of-type : 부모의 자식 중에서 특정 element 중 마지막에 나오는 element를 선택*/
+      /*selector는 부모element가 아닌 자식element로 타겟*/
+      /*example*/
+      .example_9:first-of-type {
+        color: red;
+      }
+      .example_9:last-of-type { 
+        color: lightblue;
+      }
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*다양한 선택자 조합하기*/
+
+      /* div.example {} : class 속성값이 example인 div 태그 */
+
+      /* section#example {} : id 속성값이 example인 section 태그 */
+
+      /*#main.example {} : id 속성값이 main이고, class 속성값이 example인 요소*/
+
+      /*pseudo-class와 하위 선택자, 자식 선택자를 조합한 형태도 가능*/
+      /*div:hover button {} : div 태그에 마우스를 올린 상태일 때, 해당 div 태그 하위에 있는 button 태그 선택*/
+      /*div:hover > button {} : div 태그에 마우스를 올린 상태일 때, 해당 div 태그와 자식 관계에 있는 button태그 선택*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*개별성 규칙의 점수*/
+      /* 전체 선택자 (ex: * ) : 0점 */
+      /* 태그 선택자 (ex: div, p, h1 ) : 1점 */
+      /* 가상 요소 선택자 (ex: ::before, ::after ) : 1점 */
+      /* 클래스 선택자 (ex: .box, .title ) : 10점 */
+      /* 가상 클래스 선택자 (ex: :hover, :link ) : 10점 */
+      /* 아이디 선택자 (ex: #title, #main ) : 100점 */
+      /* 인라인 선택자 (ex: style="color:red" ) : 1000점 */
+      /* 예외 문법 - { css code !important } : 10000점 */
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*CSS 단위*/
+
+      /*절대 단위 : 어떤 환경이라도 동일한 크기로 보이는 단위*/
+      /*절대 단위 : px (pixel)*/
+
+      /*상대 단위 : 부모 요소 또는 웹 브라우저의 창 크기에 따라 상대적으로 결정되는 단위*/
+        /* % */
+        /* % 단위는 부모 요소의 속성값에 따라 상대적인 크기를 가진다 */
+        /*.parent {
+            font-size: 16px;
+          }
+          .child {
+            font-size:80%;    <- 16px(부모 font-size 크기) * 0.8 = 12.8px
+          }
+          .child-to-child {
+            font-size:80%;    <- 12.8px(부모 font-size 크기) * 0.8 = 10.24px
+          }*/
+
+        /* em */
+        /* em 단위는부모 요소의 텍스트 크기를 기준으로 상대적인 크기를 가진다 */
+        /*.parent {
+            font-size: 16px;
+          }
+          .child {
+            font-size:2em;    <- 16px(부모 font-size 크기) * 2em = 32px
+          }
+          .child-to-child {
+            font-size:2em;    <- 32px(부모 font-size 크기) * 2em = 64px
+          }*/
+
+        /* rem */
+        /* rem 단위는 html 태그의 텍스트 크기에 대한 상대적인 값 / 1rem은 html 태그의 텍스트 크기의 1배 / html 태그의 텍스트 크기가 16px이므로 1rem = 16px */
+        /*html {
+            font-size: 1rem;
+          }
+          .parent {
+            font-size: 1rem;     <- 16px * 1rem = 16px
+          }
+          .child {
+            font-size: 2rem;     <- 16px * 2rem = 32px
+          }*/
+
+        /* vw */
+        /* vw 단위는 '뷰포트 너비'를 기준으로 상대적인 크기를 가진다 / 뷰포트는 코드가 보이는 대상 
+          웹이나 모바일에서는 웹 브라우저 창의 너비가 뷰포트 너비가 된다 / 1vw는 뷰포트 너비의 1/100 크기를 의미한다 */
+        /* 기준 뷰포트 너비 900px */
+        /*.parent {
+            font-size: 1vw;       <- 900px * 1/100 = 9px
+          }
+          .child {
+            font-size: 2vw;       <- 900px * 2/100 = 18px
+          }*/
+
+        /* vh */
+        /* vh 단위는 뷰포트 높이를 기준으로 상대적인 크기를 말한다 / 1vh는 '뷰포트 높이'의 1/100 크기를 의미한다*/
+        /* 기준 뷰포트 높이 400px */
+        /*.parent {
+            font-size: 1vh;       <- 400px * 1/100 = 4px
+          }
+          .child {
+            font-size: 2vh;       <- 400px * 2/100 = 8px
+          }*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*색상 표기법*/
+
+      /*키워드 표기법 : 속성값에 영문명을 사용*/
+
+      /*RGB 색상 표기법*/
+      /*rgb(red 0, green 0, blue 0)    /    rgba(red 0, green 0, blue 0, alpha(투명도) .1)*/
+      
+      /*HEX 표기법*/
+      /*HEX 표기법은 RGB에 해당하는 값을 각각 16진수로 변환해 00~ff로 나타내는 표기법*/
+      /* #RRGGBB ex) red : #ff0000 , green : #00ff00 , blue : #0000ff */
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*텍스트 꾸미기*/
+
+      /*font-family*/
+      /* serif : 삐침이 있는 명조 계열의 글꼴 */
+      /* sans-serif : 삐침이 없고 굵기가 일정한 고딕 계열의 글꼴 */
+      /* monospace : 텍스트 폭과 간격이 일정한 글꼴 */
+      /* fantasy : 화려한 글꼴 */
+      /* cursive : 손으로 쓴 것 같은 필기체 계열의 글꼴 */
+
+      /*font-weight*/
+      /*숫자 표기법 : 100단위로 텍스트 굵기를 표기하는 방법 / 100 ~ 900 , 100이 가장 얇고 900이 가장 굵게 표시*/
+      /*키워드 표기법*/
+        /* lighter : 부모 요소의 굵기보다 얇게 지정 */
+        /* normal : 숫자 표기법에서 400과 같은 굵기 */
+        /* bold : 숫자 표기법에서 700과 같은 굴기 */
+        /* bolder : 부모 요소의 굵기보다 굵게 지정 */
+
+      /*font-style*/
+        /* normal : 기본 형태로 표시 */
+        /* italic : 이탤릭체로 표시 */
+        /* oblique : 기울임꼴로 표시 */
+      
+      /*font-variant*/
+      /*font-variant 속성은 영문 텍스트를 크기가 '작은 대문자'로 변경할 때 사용*/
+        /* normal : 텍스트를 변환하지 않는다 */
+        /* small-caps : 텍스트를 크기가 작은 대문자로 변환한다 */
+
+      /*text-align*/
+        /* left : 텍스트를 왼쪽 정렬 */
+        /* center : 텍스트를 중앙 정렬 */
+        /* right : 텍스트를 오른쪽 정렬 */
+        /* justify : 텍스트를 양쪽 정렬 */
+
+      /*text-decoration*/
+      /*텍스트에 선을 그음*/
+        /* none : 텍스트 장식을 모두 지운다 */
+        /* line-through : 텍스트 중간을 관통하는 선을 긋는다 */
+        /* overline : 텍스트 위에 선을 긋는다 */
+        /* underline : 텍스트 아래에 선을 긋는다 */
+
+      /*letter-spacing*/
+      /*letter-spacing 속성은 자간(글자 사이의 간격)을 조절할 때 사용 / 속성값으로 normal 또는 크기를 넣을 수 있다*/
+
+      /*line-height*/
+      /*line-height 속성은 텍스트 한 줄의 높이를 지정할 때 사용*/
+        /* line-height: normal;     <- 웹 브라우저에서 정한 기본값, 보통 1.2 */
+        /* line-height: 1;          <- 현재 font-size 값의 1배 */
+        /* line-height: 200%;       <- 현재 font-size 값의 2배 */
+        /* line-height: 10px;       <- 입력한 크기를 적용 */
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*box model*/
+
+      /*margin*/
+        /*margin: <margin-top> <margin-right> <margin-bottom> <margin-left>;*/
+        /*margin: <margin-top & margin-bottom> <margin-right & margin-left>;*/
+      /*margin 겹침 현상 (margin collapse)*/
+      /*인접한 margin 값이 둘 중 더 큰 값으로 통일되는 것 
+      같은 레벨(형제 관계)에 있는 요소들의 margin 영역이 중첩되면 더 큰 값을 가진 margin 영역으로 병합되어 출력되는 현상*/
+
+      /*border*/
+      /*border: <border-width> <border-style> <border-color>*/
+        /*<border-width>*/
+          /* none : 테두리를 그리지 않는다 */
+          /* hidden : 테두리를 화면에서 감춘다 */
+          /* solid : 테두리를 실선으로 그린다 */
+          /* double : 테두리를 이중 실선으로 그린다 */
+          /* dotted : 테두리를 점선으로 그린다 */
+          /* dashed : 테두리를 dotted보다 긴 점선으로 그린다 */
+          /* groove : 테두리가 파인 것처럼 그린다 */
+          /* ridge : 테두리가 튀어나온 것처럼 그린다 */
+          /* inset : 테두리를 요소가 파인 것처럼 그린다 */
+          /* outset : 테두리를 요소가 튀어나온 것처럼 그린다 */
+
+      /*padding*/
+        /*padding: <padding-top> <padding-right> <padding-bottom> <padding-left>*/
+        /*padding: <padding-top & padding-bottom> <padding-right & padding-left>*/
+      
+      /*content*/
+        /*width , height attribute*/
+        /*width 는 content 영역의 너비 / height 는 content 영역의 높이를 지정*/
+        /*box-sizing attribute*/
+        /*box-sizing 은 width, height 속성의 적용 기준을 지정
+         기본으로 content-box 값이 적용된 상태여서 width, height 속성으로 지정되는 영역을 content 영역으로 제한
+         따라서 값을 border-box로 정의하면 width, height 속성의 지정 영역을 border 영역으로 바꿀 수 있다*/
+        /*box-sizing: content-box   <- width, height 속성의 적용 범위를 content 영역으로 제한*/
+        /*box-sizing: border-box    <- width, height 속성의 적용 범위를 border 영역으로 제한*/
+      
+      /*박스 모델의 성격과 display 속성*/
+        /*1. block 성격*/
+          /*element의 너비가 콘텐츠 유무와 상관없이 항상 가로 한 줄을 다 차지 (hn , p , div)*/
+        /*2. inline 성격*/
+          /*element의 너비를 콘텐츠 크기만큼만 차지하는 성격 (a , span, strong)*/
+        /*3. inline-block 성격*/
+          /*인라인 성격처럼 element의 너비가 콘텐츠의 크기만큼만 차지하지만, 그 외의 성격은 블록 성격을 가지는 복합적인 성격*/
+          /*img tag를 사용할 때 웹 브라우저의 수평 공간이 남아 있으면 한 줄로 배치된다*/
+        /*4. 'block' vs 'inline' vs 'inline-block'*/
+          /*'block' 이나 'inline-block' 은 width, height, margin, padding 속성이 전부 적용*/
+          /*'inline' 은 width, height 속성은 적용되지 않고 padding과 margin 속성은 각각 왼쪽과 오른쪽 방향만 적용*/
+        /*5. display 속성*/
+          /*display: block;  /  display: inline;   /   display: inline-block;*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*배경 설정하기*/
+
+      /*background-color attribute*/
+
+      /*background-image attribute*/
+      /*background-image: url('이미지 경로');*/
+      /*주의사항 1. element의 배경 크기가 반드시 있어야 한다. 요소의 배경에 이미지를 삽입하는 원리이기 때문에 너비와 높이를 지정하지 않으면 이미지가 안 보인다*/
+      /*주의사항 2. 이미지의 크기가 element의 배경 크기가와 맞지 않으면 어색해 보인다.
+                    요소의 배경이 삽입하려는 이미지보다 작은 경우 원본 이미지가 잘린다, 요소의 배경이 큰 경우 이미지가 가로 방향으로 반복되어 채워진다*/
+      
+      /*background-repeat attribute*/
+      /*background-repeat: no-repeat;     <- 이미지를 반복하지 않는다*/
+      /*background-repeat: repeat-x;      <- 이미지를 가로 방향으로 반복한다*/
+      /*background-repeat: repeat-y;      <- 이미지를 세로 방향으로 반복한다*/
+      /*background-repeat: repeat;        <- 이미지를 가로와 세로 방향으로 반복한다*/
+      /*background-repeat: round;         <- 이미지를 반복하되 이미지가 요소에 딱 맞도록 크기를 자동 조절한다*/
+      /*background-repeat: space;         <- 이미지가 잘리지 않도록 반복한다*/
+
+      /*background-size attribute*/
+      /*element의 배경 크기가 이미지보다 작을 때 이미지가 잘려 보이는 문제를 이미지 크기를 지정해서 처리할 수 있다*/
+      /*background-size: auto;     <- 이미지 크기를 유지*/
+      /*backgorund-size: cover;    <- 이미지의 가로 세로 비율을 유지하면서 크기를 확대하거나 축소해 요소의 배경에 꽉 채운다*/
+      /*background-size: contain;  <- 이미지의 가로 세로 비율을 유지하면서 이미지가 배경 요소 안에 들어가도록 크기를 확대하거나 축소한다*/
+      /*background-size: width height;   <- 이미지 크기를 직접 지정*/
+
+      /*background-position attribute*/
+      /*삽입하려는 이미지의 위치를 결정할 수 있다*/
+      /*background-position: x위치 y위치;*/
+        /* x : left, center, right  - x축(가로) 방향의 위치를 지정*/
+        /* y : top, center, bottom  - y축(세로) 방향의 위치를 지정*/
+        /* 공통 : px, rem, em, %    - 위치를 직접 지정*/
+
+      /*background-attachment attribute*/
+      /*element에 삽입된 이미지를 스크롤할 때, 이미지의 작동 방식을 결정*/
+      /*background-attachment: local;   <- 삽입된 이미지가 요소와 웹 브라우저에서 모두 스코롤된다*/
+      /*background-attachment: scroll;  <- 삽입된 이미지가 요소에서는 고정되지만, 웹 브라우저에서는 스크롤된다*/
+      /*background-attachment: fixed;   <- 삽입된 이미지가 요소와 웹 브라우저에서 모두 고정된다*/
+      
+      /*background attribute 한 번에 지정하기*/
+      /*background: <color 속성값> <image 속성값> <repeat 속성값> <position 속성값/size 속성값> <attachment 속성값>;*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*HTML element 배치하기*/
+
+      /*position attribute*/
+      /*HTML element를 기본 흐름에서 벗어나 좌푯값에 따라 배치할 때 사용*/
+      /*position: static;       <- 요소를 기본 흐름에 따라 배치*/
+      /*position: relative;     <- 요소를 기본 흐름에 따라 배치하지만, 좌표 속성을 사용할 수 있다*/
+      /*position: absolute;     <- 요소를 기본 흐름에서 벗어나 절대적인 좌표 위치에 따라 배치*/
+      /*position: fixed;        <- 요소를 기본 흐름에서 벗어나 절대적인 좌표 위치에 따라 배치, 단 스크롤해도 해당 위치에 고정*/
+      /*position: sticky;       <- 요소를 static 값처럼 기본 흐름에 따라 배치하지만, 지정한 좌표의 임계점에 이르면 fixed 값처럼 화면에 고정*/
+      /*z-index: 정숫값;        <- 속성값의 숫자가 클수록 요소가 더 앞쪽에 배치*/
+
+      /*float attirbute*/
+      /*대상 요소를 공중에 띄워 다음에 오는 요소를 주변에 자연스럽게 배치하기 위한 용도로 사용*/
+      /*float: none;    <- float 속성을 적용하지 않는다*/
+      /*float: left;    <- 대상 요소를 공중에 띄워 왼쪽에 배치하면서 다음에 오는 요소를 주변에 자연스럽게 배치*/
+      /*float: right;   <- 대상 요소를 공중에 띄워 오른쪽에 배치하면서 다음에 오는 요소를 주변에 자연스럽게 배치*/
+
+      /*clear attribute*/
+      /*float 속성을 해제할 때 사용하는 속성*/
+      /*float 속성은 대상 요소의 다음 요소에 영향을 주기 때문에 영향을 주지 않도록 float 속성을 해제해야 한다*/
+      /*clear: left;   <- float 속성의 left 값을 해제한다*/
+      /*clear: right;  <- float 속성의 right 값을 해제한다*/
+      /*clear: both;   <- float 속성의 left와 right 값을 모두 해제*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*전환 효과 attribute 적용하기*/
+      /*CSS에서 한 요소에 적용된 스타일 속성값을 다른 속성값으로 변하게 하는 것을 전환(transition)이라 한다*/
+
+      /*transition-property attribute*/
+      /*전환 효과를 적용할 대상 속성을 지정*/
+      /*example*/
+      /*transition-property: background-color;                 <- background-color 속성에 전환 효과를 주고 싶을 때*/
+      /*transition-property: background-color, color, width;   <- 전환 효과를 여러 속성에 지정하고 싶을 때*/
+      /*transition-property: all;                              <- 개별 속성이 아닌 모든 속성에 전환 효과를 넣고 싶을 때*/
+      /*transition-property: none;                             <- 전환 효과 속성을 지정하지 않는다*/
+
+      /*transition-duration attribute*/
+      /*전환 효과의 지속 시간을 설정하는 데 사용*/
+      /*example*/
+      /*transition-property: background-color, width, color;*/
+      /*transition-duration: 1s, 2s, 500ms;*/
+
+      /*transition-delay attribute*/
+      /*전환 효과의 발생을 지연할 수 있다*/
+      /*transition-delay: <시간>;*/
+
+      /*transition-timing-function attribute*/
+      /*전환 효과의 진행 속도를 지정*/
+      /*transition-timing-function: linear;       <- 처음 속도와 마지막 속도가 일정*/
+      /*transition-timing-function: ease;         <- 처음에는 속도가 점점 빨라지다가 중간부터 점점 느려진다*/
+      /*transition-timing-function: ease-in;      <- 처음에는 속도가 느리지만 완료될 때까지 점점 빨라진다*/
+      /*transition-timing-function: ease-out;     <- 처음에는 속도가 빠르지만 완료될 때까지 점점 느려진다*/
+      /*transition-timing-function: ease-in-out;  <- 처음에는 속도가 느리지만 점점 빨라지다가 다시 점점 느려진다*/
+      /*transition-timing-function: cubic-bezier(p1, p2, p3, p4);   <- 사용자가 정의한 속도로 진행*/
+      /*cubic-bezier 사용 tip*/
+        /*크롬 개발자 도구 이용 : 크롬의 개발자 도구에서 transition-timing-function 속성이 적용된 요소를 선택하면 직접 곡선을 조정할 수 있는 화면이 나온다*/
+        /*외부 사이트 이용 : https://cubic-bezier.com  / 여기서 조정하면 cubic-bezier() 값을 확인할 수 있다*/
+      
+      /*transition 한 번에 지정하기*/
+      /*transition: <property>, <duration>, <timing-function>, <delay>*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*애니메이션 속성으로 전환 효과 제어하기*/
+      /*애니메이션 속성은 전환 효과 속성보다 더 정확하고 부드럽게 전환 효과를 제어할 수 있다*/
+
+      /*keyframe*/
+      /*애니메이션은 정지된 이미지를 연속적으로 보여줘서 움직이는 것처럼 보이게 한다.*/
+      /*키 프레임에는 시작과 종료에 해당하는 최소 2개 시점에 대한 스타일이 정의되어야 한다.*/
+      /*example*/
+        /*@keyframes <키 프레임명> {
+          0%{background-color: red;}
+          100%{background-color: green;}
+        }*/
+        /*@keyframes <키 프레임명> {
+          from{background-color: red;}
+          to{background-color: green;}
+        }*/
+        /*@keygrames <키 프레임명> {
+          0%{color: red;}
+          25%{color: orange;}
+          50%{color: yellow;}
+          100%{color: green;}
+        }*/
+
+      /*animation-name attribute*/
+      /*특정 요소에서 적용할 키 프레임명을 지정*/
+      /*animation-name: <키 프레임명>;*/
+
+      /*animation-duration attribute*/
+      /*애니메이션을 지속할 시간을 설정*/
+      /*animation-duration: <지속 시간>;*/
+
+      /*animation-delay attribute*/
+      /*애니메이션 실행을 지연할 수 있다*/
+      /*animation-delay: <지속 시간>;*/
+
+      /*animation-fill-mode attribute*/
+      /*애니메이션이 끝나도 원래 상태로 돌아가지 않고 애니메이션이 종료된 시점의 상태를 유지할 수 있는 속성*/
+      /*애니메이션이 실행되기 전과 후의 스타일을 지정*/
+      /*animation-fill-mode: none;      <- 실행 전- 시작 시점의 스타일을 적용하지 않고 대기 / 실행 후- 실행되기 전의 스타일 적용 상태로 돌아간다*/
+      /*animation-fill-mode: forwards;  <- 실행 전- 시작 시점의 스타일을 적용하지 않고 대기 / 실행 후- 키 프레임에 정의된 종료 시점의 스타일을 적용하고 대기*/
+      /*animation-fill-mode: backwards; <- 실행 전- 키 프레임에 정의된 시작 시점의 스타일을 적용하고 대기 / 실행 후- 실행되기 전의 스타일 적용 상태로 돌아간다*/
+      /*animation-fill-mode: both;      <- 실행 전- 키 프레임에 정의된 시작 시점의 스타일을 적용하고 대기 / 키 프레임에 정의된 종료 시점의 스타일을 적용하고 대기*/
+
+      /*animation-iterator-count attribute*/
+      /*애니메이션은 기본으로 1회 실행하고 종료 / 이 속성을 사용하면 실행 횟수를 조절할 수 있다*/
+      /*animation-iterator-count: < 횟수 (infinite(무한반복)) >;*/
+
+      /*animation-play-state attribute*/
+      /*애니메이션의 재생 상태를 지정*/
+      /*animation-play-state: paused;   <- 애니메이션의 실행을 일시 정지*/
+      /*animation-play-state: running;  <- 애니메이션을 실행*/
+      /*순수 HTML, CSS 코드만으로는 불가능하고 Javascript도 함께 사용해야 함*/
+
+      /*animation-direction attribute*/
+      /*애니메이션의 진행 방향을 지정*/
+      /*animation-direction: normal;             <- 애니메이션의 진행 방향을 키 프레임에 정의된 시간 순서대로 진행*/
+      /*animation-direction: reverse;            <- 애니메이션의 진행 방향을 키 프레임에 정의된 시간 순서의 역으로 진행*/
+      /*animation-direction: alternate;          <- 애니메이션이 1회 이상 실행될 경우 홀수 번째는 normal로, 짝수 번째는 reverse로 진행*/
+      /*animation-direction: alternate-reverse   <- 애니메이션이 1회 이상 실행될 경우 홀수 번째는 reverse로, 짝수 번째는 normal로 진행*/
+
+      /*animation-timing-function attribute*/
+      /*transition-timing-function = animation-timing-function*/
+
+      /*animation 한 번에 지정하기*/
+      /*animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state>;*/
+      /*속성값을 전부 다 적을 필요는 없고 한 번에 적용하고 싶은 애니메이션 속성만 적어도 된다*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*변형 효과 적용하기*/
+      /*요소의 크기를 변경하거나 위치를 이동하거나 회전시키는 것처럼 요소 자체를 변하게 하려면 변형(transform) 효과 속성을 사용*/
+
+      /*transform attribute*/
+      /*transform: translate(x, y);     <- 요소를 현재 위치에서 x와 y만큼 이동*/
+      /*transform: translateX(n);       <- 요소를 현재 위치에서 n만큼 x축으로 이동*/
+      /*transform: translateY(n);       <- 요소를 현재 위치에서 n만큼 y축으로 이동*/
+      /*transform: scale(x, y);         <- 요소를 x와 y만큼 확대 또는 축소*/
+      /*transform: scaleX(n);           <- 요소를 n만큼 x축으로 확대 또는 축소*/
+      /*transform: scaleY(n);           <- 요소를 n만큼 y축으로 확대 또는 축소*/
+      /*transform: skew(xdeg, ydeg);    <- 요소를 x축과 y축으로 xdeg, ydeg(각도)만큼 기울인다*/
+      /*transform: skewX(deg);          <- 요소를 주어진 deg만큼 x축 방향으로 기울인다*/
+      /*transform: skewY(deg);          <- 요소를 주어진 deg만큼 y축 방향으로 기울인다*/
+      /*transform: rotate(deg);         <- 요소를 주어진 deg만큼 회전*/
+
+      /*transform-origin attribute*/
+      /*회전 기준점을 정해 변형 효과를 다르게 적용*/
+      /*transform-origin: <x축 위치> <y축 위치>;*/
+      /*위치는 % 단위 or 정해진 키워드*/
+        /*x축 : 'left' - 왼쪽을 기준점  /  'center' - 중앙을 기준점  /  'right' - 오른쪽을 기준점*/
+        /*y축 : 'top' - 위쪽을 기준점  /  'center' - 중앙을 기준점  /  'bottom' - 아래쪽을 기준점*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*flexible box layout*/
+
+      /*flex-direction attribute*/
+      /*flex-direction: row;              <- 주축 방향을 왼쪽에서 오른쪽으로 지정*/
+      /*flex-direction: row-reverse;      <- 주축 방향을 오른쪽에서 왼쪽으로 지정*/
+      /*flex-direction: column;           <- 주축 방향을 위쪽에서 아래쪽으로 지정*/
+      /*flex-direction: column-reverse;   <- 주축 방향을 아래쪽에서 위쪽으로 지정*/
+
+      /*flex-wrap attribute*/
+      /*플렉스 아이템이 플렉스 컨테이너 영역을 벗어날 때 어떻게 처리할지를 결정*/
+      /*flex-wrap: nowrap;        <- 플렉스 아이템이 플렉스 컨테이너를 벗어나도 무시한다*/
+      /*flex-wrap: wrap;          <- 플렉스 아이템이 플렉스 컨테이너를 벗어나면 줄 바꿈을 한다*/
+      /*flex-wrap: wrap-reverse;  <- 플렉스 아이템이 플렉스 컨테이너를 벗어나면 wrap의 역방향으로 줄 바꿈을 한다*/
+
+      /*flex-flow attribute*/
+      /*flex-direction 속성과 flex-wrap 속성을 한 번에 사용할 수 있는 단축 속성*/
+      /*flex-flow: <flex-direction> <flex-wrap>*/
+
+      /*justify-content attribute*/
+      /*플렉스 아이템을 주축 방향으로 정렬할 때 사용*/
+      /*justify-content: flex-start;       <- 주축 방향의 시작을 기준으로 정렬*/
+      /*justify-content: flex-end;         <- 주축 방향의 끝을 기준으로 정렬*/
+      /*justify-content: center;           <- 주축 방향의 중앙에 정렬*/
+      /*justify-content: space-between;    <- 플렉스 아이템 사이의 간격이 균일하도록 정렬*/
+      /*justify-content: space-around;     <- 플렉스 아이템의 둘레(around)가 균일하도록 정렬*/
+      /*justify-content: space-evenly;     <- 플렉스 아이템 사이와 양끝의 간격이 균일하도록 정렬*/
+
+      /*align-items attribute*/
+      /*align-items: stretch;       <- cross axis 방향으로 플렉스 아이템의 너비나 높이가 늘어난다*/
+      /*align-items: flex-start;    <- cross axis 방향의 시작을 기준으로 정렬*/
+      /*align-items: flex-end;      <- cross axis 방향의 끝을 기준으로 정렬*/
+      /*align-items: center;        <- cross axis 방향의 중앙을 기준으로 정렬*/
+      /*align-items: baseline;      <- 플렉스 아이템의 baseline을 기준으로 정렬*/
+
+      /*align-content attribute*/
+      /*플렉스 아이템을 cross axis 방향으로 정렬할 때 사용*/
+      /*그러나 플렉스 아이템이 flex-wrap 속성 때문에 두 줄 이상이 됐을 때만 사용*/
+
+      /*align-items attribute*/
+      /*플렉스 아이템들을 한 번에 정렬하지 않고 각각 정렬하고 싶을 때*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*Grid layout*/
+      /*웹 페이지에서 2차원 방식으로 레이아웃을 설계할 수 있도록 고안된 스타일*/
+      /*2차원 방식은 가로와 세로를 같이 사용해 레이아웃을 설계하는 방식*/
+      /*그리드를 사용하면 1차원 레이아웃인 플렉스 박스보다 더 폭넓게 레이아웃을 설계할 수 있다*/
+
+      /*grid-template-columns , grid-template-rows attribute*/
+      /*grid-template-columns: <1열값> <2열값>*/
+      /*grid-template-rows: <1행값> <2행값>*/
+      /*grid-template-columns: repeat(2, 100px);   <- 두 열이 같은 크기*/
+      /*grid-template-rows: repeat(2, 100px);      <- 두 행이 같은 크기*/
+      /*grid-template-columns: minmax(10px, 100px);      <- 최소 10px ~ 최대 100px*/
+      /*grid-template-rows: minmax(10px, 100px);         <- 최소 10px ~ 최대 100px*/
+      /*grid-template-columns: repeat(2, minmax(50px, 100px));    <- 두 열 최소 50px ~ 최대 100px*/
+      /*grid-template-rows: repeat(2, minmax(50px, 100px));       <- 두 행 최소 50px ~ 최대 100px*/
+
+      /*row-gap , column-gap attribute*/
+      /*row-gap: <크기>;*/    /*column-gap: <크기>;*/
+
+      /*align-items attribute*/
+      /*그리드 셀의 높이가 그리드 아이템보다 클 때 각 그리드 아이템을 '각 그리드 셀의 세로 방향'으로 정렬*/
+      /*align-items: stretch;       <- 그리드 아이템이 그리드 셀을 꽉 채우도록 크기를 늘린다*/
+      /*align-items: start;         <- 그리드 아이템을 그리드 셀의 맨 위에 배치*/
+      /*align-items: center;        <- 그리드 아이템을 그리드 셀의 세로 방향 중간에 배치*
+      /*align-items: end;           <- 그리드 아이템을 그리드 셀의 맨 아래에 배치*/
+
+      /*align-self attribute*/
+      /*그리드 아이템을 한 번에 정렬하지 않고 그리드 아이템을 각각 정렬하고 싶을 때*/
+
+      /*justify-items attribute*/
+      /*그리드 아이템을 '각 그리드 셀의 가로 방향'으로 정렬*/
+      /*justify-items: stretch;       <- 그리드 아이템이 그리드 셀을 꽉 채우도록 늘린다*/
+      /*justify-items: start;         <- 그리드 아이템을 그리드 셀의 왼쪽 끝에 배치*/
+      /*justify-items: center;        <- 그리드 아이템을 그리드 셀의 가로 방향 중간에 배치*
+      /*justify-items: end;           <- 그리드 아이템을 그리드 셀의 오른쪽 끝에 배치*/
+      
+      /*justify-self attribute*/
+      /*그리드 아이템을 개별로 정렬할 때 사용하는 속성*/
+
+      /*place-items , place-self attribute*/
+      /*place-items: <align-items> <justify-items>;*/
+      /*place-self: <align-self> <justify-self>;*/
+
+      /*grid-template-areas attribute*/
+      /*그리드 컨테이너에 그리드 레이아웃에 표시된 행 이름을 지정할 수 있다*/
+
+      /*grid-area attribute*/
+      /*grid-template-areas 속성으로 이름을 지정하고 나면 grid-area 속성으로 이름을 그리드 아이템에 배치할 수 있다*/
+      /*grid-area: <행, 열 이름>;*/
+
+      /*그리드 라인과 그리드 넘버*/
+      /*그리드 컨테이너를 구성하는 행과 열을 그리는 선을 그리드 라인*/
+      /*그리드 라인에는 각각 고유한 번호가 있는데, 이를 그리드 넘버*/
+
+      /*grid-column-start , grid-column-end attribute*/
+      /*그리드 넘버를 이용해 그리드 아이템의 '열 시작 위치와 종료 위치'를 지정*/
+
+      /*grid-row-start , grid-row-end attribute*/
+      /*그리드 넘버를 이용해 그리드 아이템의 '행 시작 위치와 종료 위치'를 지정*/
+
+      /*grid-column , grid-row attribute*/
+      /*grid-column-start, grid-column-end 속성을 한 번에 사용 / gird-row-start , grid-row-end 속성을 한 번에 사용*/
+      /*grid-column: <start> <end>;*/   /*grid-row: <start> <end>;*/      
+      /*시작 번호부터 몇 개의 그리드 셀을 차지할지도 된다*/
+      /*grid-column: <start>/span <열 개수>;    (grid-column: <start>/<end>;)*/
+      /*grid-row: <start>/span <행 개수>;       (grid-row: <start>/<end>;)*/
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+      /*반응형 웹을 위한 미디어 쿼리 사용하기*/
+      /*responsive web은 현대적인 웹 페이지에서 빠질 수 없는 중요한 트렌드*/
+      /*반응형 웹을 만드는 주요 기술 중 하나가 media query*/
+
+      /*media query*/
+      /*미디어 쿼리는 사이트에 접속하는 미디어 타입과 특징, 해상도에 따라 다른 스타일 속성을 적용하게 하는 기술*/
+
+      /*viewport 뷰포트*/
+      /*웹 페이지가 접속한 기기에서 보이는 실제 영역의 크기를 의미*/
+
+      /*meta tag(HTML)의 content 속성*/
+      /*content="width="            <- 뷰포트의 너비를 설정한다. 보통 device-width로 설정*/
+      /*content="height="           <- 뷰포트의 높이를 설정한다. 잘 사용하지 않는다*/
+      /*content="initial-scale="    <- 뷰포트의 초기 배율을 설정. 1이 기본값이며 1보다 작으면 축소 값, 1보다 크면 확대 값으로 설정된다*/
+      /*content="minimum-scale="    <- 뷰포트의 최소 축소 비율을 설정. 기본으로 0.25가 적용되어 있다*/
+      /*content="maximum-scale="    <- 뷰포트의 최대 확대 비율을 설정. 기본으로 5.0이 적용되어 있다*/
+      /*content="user-scalable="    <- 뷰포트의 확대 또는 축소 여부를 설정. yes 또는 no로 지정하는데, no로 지정하면 화면을 확대 또는 축소할 수 없다*/
+
+      /*media query의 기본 문법*/
+      /* @media <not | only> <mediatype> and (media feature) <and | or | not> (media feature) { css code }*/
+
+        /*not | only*/
+          /*not : 뒤에 오는 모든 조건을 부정한다*/
+          /*only : 미디어 쿼리를 지원하는 기기만 미디어 쿼리를 해석하라는 의미*/
+
+        /*mediatype*/
+        /*미디어 쿼리가 적용될 미디어 타입을 명시. 생략 가능, 생략할 경우 all로 인식. 생략하지 않으면 반드시 다음에 'and'연산자가 와야 한다*/
+          /*all : 모든 기기*/
+          /*print : 인쇄 장치*/
+          /*screen : 컴퓨터 화면 장치 또는 스마트 기기*/
+          /*speech : 스크린 리더기 같은 보조 프로그램으로 웹 페이지를 소래 내어 읽어 주는 장치*/
+
+        /*media feature*/
+        /*미디어 쿼리가 적용될 미디어 조건을 적는다. 사용할 수 있는 조건은 18가지*/
+          /*min-width : 화면 너비 / 미디어 쿼리가 적용될 '최소 너비'*/
+          /*max-width : 화면 너비 / 미디어 쿼리가 적용될 '최대 너비'*/
+          /*orientation : portrait(초상화) / 세로 모드, 뷰포트의 세로 높이가 가로 너비보다 큰 경우*/
+          /*orientation : landscape / 가로 모드, 뷰포트의 가로 너비가 세로 높이보다 큰 경우*/ 
+      /* ---------------------------------------------------------------------------------------------------------------------------------- */
+    </style>
+  </head>
+  <body>
+    <div>CSS 배우는 중입니다.</div>
+
+    <div class="example_1">example 1</div>
+
+    <input class="example_2" type="text">example 2
+
+    <div>
+      <input class="example_3" type="checkbox" id="check">
+      <label for="check">example 3</label>
+    </div>
+
+    <div>
+      <input class="example_4" type="text" disabled>
+      <button class="example_4" disabled>example 4</button>
+    </div>
+
+    <div>
+      <input class="example_5" type="text">
+      <button class="example_5">example 5</button>
+    </div>
+
+    <ul>
+      <li class="example_6">example6</li>
+      <li class="example_6">example6</li>
+      <li class="example_6">example6</li>
+      <li class="example_6">example6</li>
+    </ul>
+    
+    <div>
+      <p class="example_7">example 7_(1)</p>          <!--부모인 div 태그의 첫 번째 자식 요소이므로 빨간색 스타일 적용-->
+      <span class="example_7">example 7_(2)</span>    <!--부모인 div 태그의 마지막 자식 요소이므로 하늘색 스타일 적용-->
+    </div>
+    <div>
+      <span class="example_7">example 7_(3)</span>    <!--부모인 div 태그의 첫 번재 자식 요소이므로 빨간색 스타일 적용-->
+      <p class="example_7">example 7_(4)</p>          <!--부모인 div 태그의 첫 번째 자식 요소이므로 하늘색 스타일 적용-->
+    </div>
+
+    <div>
+      <p class="example_8">example 8_p_(0)</p>        <!--부모인 div 태그의 '특정' 자식 요소 중 밑에서부터 두 번째 p 태그이므로 하늘색 스타일 적용-->
+      <span>example_8_span_(1)</span>
+      <p class="example_8">example_8_p(2)</p>         <!--부모인 div 태그의 '특정' 자식 요소 중 두 번째 p 태그이므로 빨간색 스타일 적용-->
+    </div>
+    <div>
+      <p class="example_8">example_8_p_(3)</p>        <!--부모인 div 태그의 '특정' 자식 요소 중 밑에서부터 두 번째 p 태그이므로 하늘색 스타일 적용-->
+      <span>example_8_span_(4)</span>
+      <span>example_8_span_(5)</span>
+      <p class="example_8">example_8_p_(6)</p>        <!--부모인 div 태그의 '특정' 자식 요소 중 두 번째 p 태그이므로 빨간색 스타일 적용-->
+    </div>
+
+    <div>
+      <span>example_9_span_(0)</span>
+      <p class="example_9">example_9_p_(1)</p>        <!--부모인 div 태그의 '특정' 자식 요소 중 첫 번째 p 태그이므로 빨간색 스타일 적용-->
+      <p class="example_9">example_9_p_(2)</p>
+      <p class="example_9">example_9_p_(3)</p>        <!--부모인 div 태그의 '특정' 자식 요소 중 마지막 p 태그이므로 하늘색 스타일 적용-->
+    </div> 
+  </body>
+</html>
